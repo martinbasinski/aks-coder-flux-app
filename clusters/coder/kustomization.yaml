@@ -11,3 +11,4 @@ spec:
     kind: GitRepository
     name: aks-coder-flux-app
     namespace: flux-system
+  targetNamespace: coder-test-flux
