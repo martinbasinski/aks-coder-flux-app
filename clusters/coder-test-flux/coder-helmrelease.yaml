@@ -1,15 +1,3 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: GitRepository
-metadata:
-  name: aks-coder-app
-  namespace: flux-system
-spec:
-  interval: 1m
-  url: https://github.com/martinbasinski/aks-coder-app
-  ref:
-    branch: main
-
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -22,11 +10,11 @@ spec:
       version: 2.14.1
       sourceRef:
         kind: GitRepository
-        name: aks-coder-app
+        name: aks-coder-flux-app
         namespace: flux-system
   interval: 1m
   install:
-    createNamespace: false  # Namespace już istnieje
+    createNamespace: false
   values:
     coder:
       env:
@@ -38,24 +26,6 @@ spec:
       image:
         repo: acraifcoder.azurecr.io/coder-base-pg
         tag: v2.11.2
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        readOnlyRootFilesystem: false
-        seccompProfile:
-          type: RuntimeDefault
-        allowPrivilegeEscalation: false
-      volumes:
-        - name: cache-volume
-          emptyDir: {}
-      volumeMounts:
-        - name: cache-volume
-          mountPath: /home/coder/.cache
-      resources:
-        requests:
-          cpu: 500m
-          memory: 1024Mi
       service:
         enable: true
         type: ClusterIP
@@ -66,5 +36,3 @@ spec:
         tls:
           enable: true
           secretName: coder-tls
-      nodeSelector:
-        agentpool: workloadpool
