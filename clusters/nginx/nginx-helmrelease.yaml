@@ -5,9 +5,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  url: https://github.com/martinbasinski/aks-coder-app
-  branch: main
-
+  url: https://github.com/<your-username>/aks-coder-app
+  ref:
+    branch: main
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
