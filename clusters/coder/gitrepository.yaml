@@ -1,12 +1,10 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: GitRepository
 metadata:
-  name: aks-coder-flux-app
+  name: aks-coder-app
   namespace: flux-system
 spec:
   interval: 1m
-  url: https://github.com/martinbasinski/aks-coder-flux-app
+  url: https://github.com/martinbasinski/aks-coder-app
   ref:
     branch: main
-  secretRef:
-    name: flux-system
