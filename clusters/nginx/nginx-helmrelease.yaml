@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  url: https://github.com/<your-username>/aks-coder-app
+  url: https://github.com/martinbasinski/aks-coder-app
   ref:
     branch: main
 ---
